@@ -51,7 +51,7 @@ namespace SSASA.WebApi
             gvEmployees.DataBind();
 
             // 4) Limpia selección (para evitar 2 filas resaltadas/estado raro)
-            gvEmployees.SelectedIndex = -1;
+            gvEmployees.SelectedIndex = 0;
             hfSelectedId.Value = "";
             SetActionButtonsEnabled(false);
 
@@ -90,6 +90,7 @@ namespace SSASA.WebApi
 
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
+            gvEmployees.PageIndex = 0;
             BindEmployees(txtSearch.Text);
 
             gvEmployees.SelectedIndex = -1;
@@ -242,16 +243,61 @@ namespace SSASA.WebApi
         {
             if (!int.TryParse(hfSelectedId.Value, out int id) || id <= 0) return;
 
-            using (var client = Soap())
+            var client = Soap();
+            try
             {
+                // Opcional: timeout por operación
+                client.InnerChannel.OperationTimeout = TimeSpan.FromSeconds(20);
+
                 bool ok = client.DeleteEmployee(id);
-                if (!ok)
-                {
-                    // opcional: mostrar error
-                }
+
+                client.Close(); // cerrar OK
+
+                hfSelectedId.Value = "";
+                gvEmployees.SelectedIndex = -1;
+                SetActionButtonsEnabled(false);
+                ClearDetails();
+
+                 BindEmployees(txtSearch.Text);
+                 ShowAlert("Empleado eliminado correctamente.");
+
+                
             }
+            catch (TimeoutException ex)
+            {
+                client.Abort();
+                ShowAlert("Timeout al eliminar. " + ex.Message);
+            }
+            catch (System.ServiceModel.CommunicationException ex)
+            {
+                client.Abort();
+                ShowAlert("Error de comunicación con el servicio. " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                client.Abort();
+                ShowAlert("Ocurrió un error al intentar eliminar: " + ex.Message);
+            }
+        }
+
+
+        private void ShowAlert(string message)
+        {
+            string script = $"alert('{message}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+        }
+
+        protected void gvEmployees_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvEmployees.PageIndex = e.NewPageIndex;
 
             BindEmployees(txtSearch.Text);
+
+            gvEmployees.SelectedIndex = -1;
+            hfSelectedId.Value = "";
+            SetActionButtonsEnabled(false);
+            ClearDetails();
         }
+
     }
 }

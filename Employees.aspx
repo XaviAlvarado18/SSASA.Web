@@ -18,8 +18,19 @@
                         <asp:Button ID="btnEdit" runat="server" CssClass="btn btn-outline-secondary pill-btn"
                             Text="✏️ Editar" OnClick="btnEdit_Click" Enabled="false" />
 
-                        <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-outline-danger pill-btn"
-                            Text="🗑️ Eliminar" OnClick="btnDelete_Click" Enabled="false" />
+                        <asp:Button ID="btnDelete" runat="server"
+                                CssClass="btn btn-outline-danger pill-btn"
+                                Text="🗑️ Eliminar"
+                                OnClick="btnDelete_Click"
+                                Enabled="false"
+                                CausesValidation="false"
+                                OnClientClick="
+                                    if(!confirm('¿Eliminar empleado?')) return false;
+                                    this.value='Eliminando...';
+                                    var b=this; setTimeout(function(){ b.disabled=true; }, 0);
+                                    return true;"
+                            />
+
 
 
                         <div class="ms-auto d-flex align-items-center gap-2">
@@ -35,10 +46,38 @@
                         CssClass="table align-middle"
                         AutoGenerateColumns="false"
                         DataKeyNames="EmployeeId"
+                        AllowPaging="true"
+                        PageSize="8"
+                        OnPageIndexChanging="gvEmployees_PageIndexChanging"
                         OnSelectedIndexChanged="gvEmployees_SelectedIndexChanged"
                         OnRowDataBound="gvEmployees_RowDataBound">
 
                         <SelectedRowStyle CssClass="table-primary" />
+
+                        <PagerTemplate>
+                            <div class="d-flex justify-content-end align-items-center gap-2 py-2">
+
+                                <!-- Previous -->
+                                <asp:LinkButton ID="lbPrev" runat="server"
+                                    CommandName="Page" CommandArgument="Prev"
+                                    CssClass="pager-btn"
+                                    CausesValidation="false"
+                                    Text="◀" />
+
+                                <!-- Info opcional -->
+                                <span class="text-muted small">
+                                    Página <%= gvEmployees.PageIndex + 1 %> de <%= gvEmployees.PageCount %>
+                                </span>
+
+                                <!-- Next -->
+                                <asp:LinkButton ID="lbNext" runat="server"
+                                    CommandName="Page" CommandArgument="Next"
+                                    CssClass="pager-btn"
+                                    CausesValidation="false"
+                                    Text="▶" />
+
+                            </div>
+                        </PagerTemplate>
 
                         <Columns>
                             <asp:CommandField ShowSelectButton="true" SelectText="▸" />
@@ -49,6 +88,7 @@
                             <asp:BoundField DataField="Tenure" HeaderText="Antigüedad" />
                         </Columns>
                     </asp:GridView>
+
 
 
                 </div>
