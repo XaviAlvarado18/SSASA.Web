@@ -362,6 +362,13 @@ namespace SSASA.Web.EmployeesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetAllDepartments", ReplyAction="*")]
         System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetAllDepartmentsResponse> GetAllDepartmentsAsync(SSASA.Web.EmployeesService.GetAllDepartmentsRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento GetDepartmentByIdResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDepartmentById", ReplyAction="*")]
+        SSASA.Web.EmployeesService.GetDepartmentByIdResponse GetDepartmentById(SSASA.Web.EmployeesService.GetDepartmentByIdRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDepartmentById", ReplyAction="*")]
+        System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetDepartmentByIdResponse> GetDepartmentByIdAsync(SSASA.Web.EmployeesService.GetDepartmentByIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -751,6 +758,74 @@ namespace SSASA.Web.EmployeesService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetDepartmentByIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetDepartmentById", Namespace="http://tempuri.org/", Order=0)]
+        public SSASA.Web.EmployeesService.GetDepartmentByIdRequestBody Body;
+        
+        public GetDepartmentByIdRequest() {
+        }
+        
+        public GetDepartmentByIdRequest(SSASA.Web.EmployeesService.GetDepartmentByIdRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetDepartmentByIdRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int departmentId;
+        
+        public GetDepartmentByIdRequestBody() {
+        }
+        
+        public GetDepartmentByIdRequestBody(int departmentId) {
+            this.departmentId = departmentId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetDepartmentByIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetDepartmentByIdResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SSASA.Web.EmployeesService.GetDepartmentByIdResponseBody Body;
+        
+        public GetDepartmentByIdResponse() {
+        }
+        
+        public GetDepartmentByIdResponse(SSASA.Web.EmployeesService.GetDepartmentByIdResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetDepartmentByIdResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public SSASA.Web.EmployeesService.Department GetDepartmentByIdResult;
+        
+        public GetDepartmentByIdResponseBody() {
+        }
+        
+        public GetDepartmentByIdResponseBody(SSASA.Web.EmployeesService.Department GetDepartmentByIdResult) {
+            this.GetDepartmentByIdResult = GetDepartmentByIdResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface EmployeeServiceSoapChannel : SSASA.Web.EmployeesService.EmployeeServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -928,6 +1003,31 @@ namespace SSASA.Web.EmployeesService {
             SSASA.Web.EmployeesService.GetAllDepartmentsRequest inValue = new SSASA.Web.EmployeesService.GetAllDepartmentsRequest();
             inValue.Body = new SSASA.Web.EmployeesService.GetAllDepartmentsRequestBody();
             return ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetAllDepartmentsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SSASA.Web.EmployeesService.GetDepartmentByIdResponse SSASA.Web.EmployeesService.EmployeeServiceSoap.GetDepartmentById(SSASA.Web.EmployeesService.GetDepartmentByIdRequest request) {
+            return base.Channel.GetDepartmentById(request);
+        }
+        
+        public SSASA.Web.EmployeesService.Department GetDepartmentById(int departmentId) {
+            SSASA.Web.EmployeesService.GetDepartmentByIdRequest inValue = new SSASA.Web.EmployeesService.GetDepartmentByIdRequest();
+            inValue.Body = new SSASA.Web.EmployeesService.GetDepartmentByIdRequestBody();
+            inValue.Body.departmentId = departmentId;
+            SSASA.Web.EmployeesService.GetDepartmentByIdResponse retVal = ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetDepartmentById(inValue);
+            return retVal.Body.GetDepartmentByIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetDepartmentByIdResponse> SSASA.Web.EmployeesService.EmployeeServiceSoap.GetDepartmentByIdAsync(SSASA.Web.EmployeesService.GetDepartmentByIdRequest request) {
+            return base.Channel.GetDepartmentByIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetDepartmentByIdResponse> GetDepartmentByIdAsync(int departmentId) {
+            SSASA.Web.EmployeesService.GetDepartmentByIdRequest inValue = new SSASA.Web.EmployeesService.GetDepartmentByIdRequest();
+            inValue.Body = new SSASA.Web.EmployeesService.GetDepartmentByIdRequestBody();
+            inValue.Body.departmentId = departmentId;
+            return ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetDepartmentByIdAsync(inValue);
         }
     }
 }

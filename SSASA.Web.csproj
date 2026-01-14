@@ -186,6 +186,9 @@
     <Content Include="Connected Services\EmployeesService\SSASA.Web.EmployeesService.GetAllDepartmentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EmployeesService\SSASA.Web.EmployeesService.GetDepartmentByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

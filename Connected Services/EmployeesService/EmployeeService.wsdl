@@ -130,6 +130,20 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="Department" nillable="true" type="tns:Department" />
         </s:sequence>
       </s:complexType>
+      <s:element name="GetDepartmentById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDepartmentByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDepartmentByIdResult" type="tns:Department" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="char">
@@ -179,6 +193,12 @@
   <wsdl:message name="GetAllDepartmentsSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllDepartmentsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetDepartmentByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDepartmentById" />
+  </wsdl:message>
+  <wsdl:message name="GetDepartmentByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDepartmentByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="EmployeeServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -211,6 +231,10 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Devuelve la lista completa de departamentos</wsdl:documentation>
       <wsdl:input message="tns:GetAllDepartmentsSoapIn" />
       <wsdl:output message="tns:GetAllDepartmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentById">
+      <wsdl:input message="tns:GetDepartmentByIdSoapIn" />
+      <wsdl:output message="tns:GetDepartmentByIdSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EmployeeServiceSoap" type="tns:EmployeeServiceSoap">
@@ -278,6 +302,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetDepartmentById">
+      <soap:operation soapAction="http://tempuri.org/GetDepartmentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="EmployeeServiceSoap12" type="tns:EmployeeServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -337,6 +370,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllDepartments">
       <soap12:operation soapAction="http://tempuri.org/GetAllDepartments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentById">
+      <soap12:operation soapAction="http://tempuri.org/GetDepartmentById" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

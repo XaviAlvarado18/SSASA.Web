@@ -117,6 +117,7 @@
                     <hr />
 
                     <div class="small">
+                        <div class="mb-1">Activo: <asp:Label ID="lblActive" runat="server" Text="-"/></div>
                         <div class="mb-1">Edad: <asp:Label ID ="lblAge" runat="server" Text="-" /></div>
                         <div class="mb-2">Genero: <asp:Label ID="lblGender" runat="server" Text="-" /></div>
                         <div>Fecha de nacimiento: <asp:Label ID="lblBirthday" runat="server" Text="-" /></div>

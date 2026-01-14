@@ -161,6 +161,8 @@ namespace SSASA.WebApi
 
             // Age si no viene del servicio, puedes calcularlo aquí
             lblAge.Text = CalculateAge(emp.BirthDate).ToString();
+
+            lblActive.Text = emp.IsActive ? "Sí" : "No";
         }
 
         private int CalculateAge(DateTime birth)
