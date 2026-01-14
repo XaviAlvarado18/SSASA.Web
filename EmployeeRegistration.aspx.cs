@@ -32,8 +32,6 @@ namespace SSASA.WebApi
 
         private void LoadEmployeeForEdit(int id)
         {
-            // Si tu formulario usa el servicio SOAP, necesitas un método GetEmployeeById en el servicio.
-            // Si NO lo tienes en el servicio, puedes llamar directo a tu DB (DatabaseLogic) o agregarlo al servicio.
 
             var client = new EmployeeServiceSoapClient();
 
@@ -51,18 +49,13 @@ namespace SSASA.WebApi
 
             txtFullName.Text = emp.FullNames ?? "";
             txtDPI.Text = emp.DPI ?? "";
-            txtBirthDate.Text = emp.BirthDate.ToString("yyyy-MM-dd"); // para input type=date
+            txtBirthDate.Text = emp.BirthDate.ToString("yyyy-MM-dd");
             txtHireDate.Text = emp.HireDate.ToString("yyyy-MM-dd");
             txtAddress.Text = emp.Address ?? "";
             txtNIT.Text = emp.NIT ?? "";
 
             ddlGender.SelectedValue = emp.Gender.ToString();
 
-            // si agregaste ddlDepartment:
-            // ddlDepartment.SelectedValue = emp.DepartmentId.ToString();
-
-            // Opcional: no permitir editar DPI si quieres
-            // txtDPI.ReadOnly = true;
         }
 
 
@@ -80,7 +73,7 @@ namespace SSASA.WebApi
                 if (txtDPI.Text.Trim().Length != 13)
                     throw new Exception("El DPI debe tener 13 dígitos.");
 
-                // ✅ Si tus inputs ya son type=date, mejor parsear con invariant "yyyy-MM-dd"
+
                 if (!DateTime.TryParse(txtBirthDate.Text, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime birth))
                     throw new Exception("Fecha de nacimiento inválida.");
 

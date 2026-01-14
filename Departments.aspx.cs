@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SSASA.Web.EmployeesService; // proxy SOAP
+using SSASA.Web.EmployeesService;
 
 namespace SSASA.WebApi
 {
@@ -68,18 +68,17 @@ namespace SSASA.WebApi
         {
             hfDeptSelectedId.Value = "0";
             txtDeptName.Text = "";
-            ddlDeptActive.SelectedValue = "1"; // activo por defecto
+            ddlDeptActive.SelectedValue = "1";
             OpenDeptModal();
         }
 
-        // EDITAR (carga datos reales)
+
         protected void btnEditDept_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(hfDeptSelectedId.Value, out int id) || id <= 0) return;
 
             using (var client = Soap())
             {
-                // ✅ REQUIERE que hayas agregado GetDepartmentById al SOAP
                 var dept = client.GetDepartmentById(id);
 
                 if (dept == null)
@@ -103,7 +102,7 @@ namespace SSASA.WebApi
 
         protected void btnSaveDept_Click(object sender, EventArgs e)
         {
-            int.TryParse(hfDeptSelectedId.Value, out int id); // 0 = nuevo
+            int.TryParse(hfDeptSelectedId.Value, out int id);
 
             string name = (txtDeptName.Text ?? "").Trim();
             bool isActive = ddlDeptActive.SelectedValue == "1";
@@ -111,7 +110,7 @@ namespace SSASA.WebApi
             if (string.IsNullOrWhiteSpace(name))
             {
                 ShowAlert("El nombre es requerido.");
-                OpenDeptModal(); // reabrir para corregir
+                OpenDeptModal();
                 return;
             }
 
@@ -126,7 +125,6 @@ namespace SSASA.WebApi
                         IsActive = isActive
                     };
 
-                    // ✅ Esto requiere que tu SOAP tenga SaveDepartment(Department dept)
                     bool ok = client.SaveDepartment(dept);
 
                 }
@@ -146,7 +144,6 @@ namespace SSASA.WebApi
 
         private void ShowAlert(string message)
         {
-            // escapar comillas simples para no romper JS
             message = (message ?? "").Replace("'", "\\'");
             string script = $"alert('{message}');";
             ScriptManager.RegisterStartupScript(this, GetType(), "DeptAlert", script, true);

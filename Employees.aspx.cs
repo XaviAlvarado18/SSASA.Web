@@ -24,14 +24,14 @@ namespace SSASA.WebApi
 
         private void BindEmployees(string filter = "")
         {
-            // 1) Traer data desde SOAP
+
             List<Employee> employees;
             using (var client = Soap())
             {
                 employees = client.GetAllEmployees()?.ToList() ?? new List<Employee>();
             }
 
-            // 2) Filtrar en memoria
+
             if (!string.IsNullOrWhiteSpace(filter))
             {
                 string f = filter.Trim();
@@ -46,18 +46,18 @@ namespace SSASA.WebApi
                     .ToList();
             }
 
-            // 3) Bind
+
             gvEmployees.DataSource = employees;
             gvEmployees.DataBind();
 
-            // 4) Limpia selección (para evitar 2 filas resaltadas/estado raro)
+
             gvEmployees.SelectedIndex = 0;
             hfSelectedId.Value = "";
             SetActionButtonsEnabled(false);
 
             if (employees.Count > 0)
             {
-                // Opcional: auto-seleccionar el primero
+
                 gvEmployees.SelectedIndex = 0;
                 int firstId = employees[0].EmployeeId;
                 hfSelectedId.Value = firstId.ToString();
@@ -105,7 +105,7 @@ namespace SSASA.WebApi
 
             e.Row.Style["cursor"] = "pointer";
 
-            // En lugar de escribir el string manual, usamos el método del Framework
+
             e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackEventReference(gvEmployees, "Select$" + e.Row.RowIndex);
         }
 
@@ -152,14 +152,14 @@ namespace SSASA.WebApi
             lblDepto.Text = string.IsNullOrWhiteSpace(emp.DepartmentName) ? "-" : emp.DepartmentName;
             lblNit.Text = string.IsNullOrWhiteSpace(emp.NIT) ? "-" : emp.NIT;
 
-            // Gender puede venir como string o char dependiendo del proxy
+
             var g = (emp.Gender).ToString();
             lblGender.Text = g == "M" ? "Masculino" : g == "F" ? "Femenino" : "-";
 
-            // BirthDate puede venir DateTime o string; normalmente DateTime
+
             lblBirthday.Text = emp.BirthDate.ToString("dd/MM/yyyy");
 
-            // Age si no viene del servicio, puedes calcularlo aquí
+
             lblAge.Text = CalculateAge(emp.BirthDate).ToString();
 
             lblActive.Text = emp.IsActive ? "Sí" : "No";
@@ -178,10 +178,10 @@ namespace SSASA.WebApi
 
         private void ShowDetails(int id, Employee rowEmp = null)
         {
-            // Si ya te pasaron el Employee (por ejemplo desde el listado), úsalo
+
             var emp = rowEmp;
 
-            // Si no vino, lo pides al SOAP
+
             if (emp == null)
             {
                 using (var client = new EmployeeServiceSoapClient())
@@ -222,10 +222,6 @@ namespace SSASA.WebApi
         {
             lblNombre.Text = "-";
             lblDepto.Text = "-";
-            // lblPuesto.Text = "-";
-            // lblEmail.Text = "-";
-            // lblTelefono.Text = "-";
-            // imgEmployee.Src = "Content/avatar.png";
         }
 
 
@@ -248,7 +244,6 @@ namespace SSASA.WebApi
             var client = Soap();
             try
             {
-                // Opcional: timeout por operación
                 client.InnerChannel.OperationTimeout = TimeSpan.FromSeconds(20);
 
                 bool ok = client.DeleteEmployee(id);
