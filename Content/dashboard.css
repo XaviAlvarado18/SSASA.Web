@@ -1,0 +1,90 @@
+﻿:root {
+    --blue: #2f66d5;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --line: #e6e9f2;
+}
+
+body {
+    background: var(--bg);
+}
+
+.topbar {
+    background: linear-gradient(90deg, #2b59c3, #3b78ff);
+    height: 64px;
+}
+
+.topbar-link {
+    color: #eaf0ff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .topbar-link:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+.app {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 64px);
+}
+
+.sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--line);
+    padding: 14px 10px;
+}
+
+.side-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #2b2f38;
+    text-decoration: none;
+    margin: 6px 6px;
+    font-weight: 600;
+}
+
+    .side-item:hover {
+        background: #eef3ff;
+    }
+
+    .side-item.active {
+        background: var(--blue);
+        color: white;
+    }
+
+.content {
+    padding: 22px;
+}
+
+.cardx {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(20,30,60,.06);
+}
+
+.cardx-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 700;
+}
+
+.cardx-body {
+    padding: 16px;
+}
+
+.table thead th {
+    background: #f3f6ff;
+    border-bottom: 1px solid var(--line);
+}
+
+.pill-btn {
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 600;
+}
