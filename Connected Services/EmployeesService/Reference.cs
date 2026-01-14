@@ -157,6 +157,10 @@ namespace SSASA.Web.EmployeesService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TenureField;
         
+        private int AgeField;
+        
+        private bool DepartmentIsActiveField;
+        
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int EmployeeId {
             get {
@@ -231,6 +235,32 @@ namespace SSASA.Web.EmployeesService {
                 if ((object.ReferenceEquals(this.TenureField, value) != true)) {
                     this.TenureField = value;
                     this.RaisePropertyChanged("Tenure");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public int Age {
+            get {
+                return this.AgeField;
+            }
+            set {
+                if ((this.AgeField.Equals(value) != true)) {
+                    this.AgeField = value;
+                    this.RaisePropertyChanged("Age");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public bool DepartmentIsActive {
+            get {
+                return this.DepartmentIsActiveField;
+            }
+            set {
+                if ((this.DepartmentIsActiveField.Equals(value) != true)) {
+                    this.DepartmentIsActiveField = value;
+                    this.RaisePropertyChanged("DepartmentIsActive");
                 }
             }
         }
@@ -369,6 +399,13 @@ namespace SSASA.Web.EmployeesService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetDepartmentById", ReplyAction="*")]
         System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetDepartmentByIdResponse> GetDepartmentByIdAsync(SSASA.Web.EmployeesService.GetDepartmentByIdRequest request);
+        
+        // CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento GetEmployeeReportResult del espacio de nombres http://tempuri.org/ no está marcado para aceptar valores nil.
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEmployeeReport", ReplyAction="*")]
+        SSASA.Web.EmployeesService.GetEmployeeReportResponse GetEmployeeReport(SSASA.Web.EmployeesService.GetEmployeeReportRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEmployeeReport", ReplyAction="*")]
+        System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetEmployeeReportResponse> GetEmployeeReportAsync(SSASA.Web.EmployeesService.GetEmployeeReportRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -826,6 +863,86 @@ namespace SSASA.Web.EmployeesService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetEmployeeReportRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployeeReport", Namespace="http://tempuri.org/", Order=0)]
+        public SSASA.Web.EmployeesService.GetEmployeeReportRequestBody Body;
+        
+        public GetEmployeeReportRequest() {
+        }
+        
+        public GetEmployeeReportRequest(SSASA.Web.EmployeesService.GetEmployeeReportRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetEmployeeReportRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public System.Nullable<int> departmentId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.Nullable<bool> status;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public System.Nullable<System.DateTime> startDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public System.Nullable<System.DateTime> endDate;
+        
+        public GetEmployeeReportRequestBody() {
+        }
+        
+        public GetEmployeeReportRequestBody(System.Nullable<int> departmentId, System.Nullable<bool> status, System.Nullable<System.DateTime> startDate, System.Nullable<System.DateTime> endDate) {
+            this.departmentId = departmentId;
+            this.status = status;
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetEmployeeReportResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployeeReportResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SSASA.Web.EmployeesService.GetEmployeeReportResponseBody Body;
+        
+        public GetEmployeeReportResponse() {
+        }
+        
+        public GetEmployeeReportResponse(SSASA.Web.EmployeesService.GetEmployeeReportResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetEmployeeReportResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public SSASA.Web.EmployeesService.Employee[] GetEmployeeReportResult;
+        
+        public GetEmployeeReportResponseBody() {
+        }
+        
+        public GetEmployeeReportResponseBody(SSASA.Web.EmployeesService.Employee[] GetEmployeeReportResult) {
+            this.GetEmployeeReportResult = GetEmployeeReportResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface EmployeeServiceSoapChannel : SSASA.Web.EmployeesService.EmployeeServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -1028,6 +1145,37 @@ namespace SSASA.Web.EmployeesService {
             inValue.Body = new SSASA.Web.EmployeesService.GetDepartmentByIdRequestBody();
             inValue.Body.departmentId = departmentId;
             return ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetDepartmentByIdAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SSASA.Web.EmployeesService.GetEmployeeReportResponse SSASA.Web.EmployeesService.EmployeeServiceSoap.GetEmployeeReport(SSASA.Web.EmployeesService.GetEmployeeReportRequest request) {
+            return base.Channel.GetEmployeeReport(request);
+        }
+        
+        public SSASA.Web.EmployeesService.Employee[] GetEmployeeReport(System.Nullable<int> departmentId, System.Nullable<bool> status, System.Nullable<System.DateTime> startDate, System.Nullable<System.DateTime> endDate) {
+            SSASA.Web.EmployeesService.GetEmployeeReportRequest inValue = new SSASA.Web.EmployeesService.GetEmployeeReportRequest();
+            inValue.Body = new SSASA.Web.EmployeesService.GetEmployeeReportRequestBody();
+            inValue.Body.departmentId = departmentId;
+            inValue.Body.status = status;
+            inValue.Body.startDate = startDate;
+            inValue.Body.endDate = endDate;
+            SSASA.Web.EmployeesService.GetEmployeeReportResponse retVal = ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetEmployeeReport(inValue);
+            return retVal.Body.GetEmployeeReportResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetEmployeeReportResponse> SSASA.Web.EmployeesService.EmployeeServiceSoap.GetEmployeeReportAsync(SSASA.Web.EmployeesService.GetEmployeeReportRequest request) {
+            return base.Channel.GetEmployeeReportAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<SSASA.Web.EmployeesService.GetEmployeeReportResponse> GetEmployeeReportAsync(System.Nullable<int> departmentId, System.Nullable<bool> status, System.Nullable<System.DateTime> startDate, System.Nullable<System.DateTime> endDate) {
+            SSASA.Web.EmployeesService.GetEmployeeReportRequest inValue = new SSASA.Web.EmployeesService.GetEmployeeReportRequest();
+            inValue.Body = new SSASA.Web.EmployeesService.GetEmployeeReportRequestBody();
+            inValue.Body.departmentId = departmentId;
+            inValue.Body.status = status;
+            inValue.Body.startDate = startDate;
+            inValue.Body.endDate = endDate;
+            return ((SSASA.Web.EmployeesService.EmployeeServiceSoap)(this)).GetEmployeeReportAsync(inValue);
         }
     }
 }

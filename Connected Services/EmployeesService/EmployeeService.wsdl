@@ -30,6 +30,8 @@
               <s:element minOccurs="1" maxOccurs="1" name="DepartmentId" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="DepartmentName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Tenure" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Age" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DepartmentIsActive" type="s:boolean" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -144,6 +146,23 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetEmployeeReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="departmentId" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="startDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endDate" nillable="true" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmployeeReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmployeeReportResult" type="tns:ArrayOfEmployee" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
     <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
       <s:simpleType name="char">
@@ -199,6 +218,12 @@
   <wsdl:message name="GetDepartmentByIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetDepartmentByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="GetEmployeeReportSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmployeeReport" />
+  </wsdl:message>
+  <wsdl:message name="GetEmployeeReportSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmployeeReportResponse" />
+  </wsdl:message>
   <wsdl:portType name="EmployeeServiceSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
@@ -235,6 +260,10 @@
     <wsdl:operation name="GetDepartmentById">
       <wsdl:input message="tns:GetDepartmentByIdSoapIn" />
       <wsdl:output message="tns:GetDepartmentByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeReport">
+      <wsdl:input message="tns:GetEmployeeReportSoapIn" />
+      <wsdl:output message="tns:GetEmployeeReportSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="EmployeeServiceSoap" type="tns:EmployeeServiceSoap">
@@ -311,6 +340,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetEmployeeReport">
+      <soap:operation soapAction="http://tempuri.org/GetEmployeeReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="EmployeeServiceSoap12" type="tns:EmployeeServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -379,6 +417,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDepartmentById">
       <soap12:operation soapAction="http://tempuri.org/GetDepartmentById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeReport">
+      <soap12:operation soapAction="http://tempuri.org/GetEmployeeReport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
