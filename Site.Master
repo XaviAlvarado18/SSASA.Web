@@ -37,18 +37,24 @@
     </nav>
 
     <div class="app">
+
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a class="side-item active" href="Employees.aspx">
+
+            <a id="lnkEmployees" runat="server" class="side-item" href="Employees.aspx">
                 <i class="fa fa-users me-2"></i> Empleados
             </a>
-            <a class="side-item" href="Departments.aspx">
+
+            <a id="lnkDepartments" runat="server" class="side-item" href="Departments.aspx">
                 <i class="fa fa-building me-2"></i> Departamentos
             </a>
-            <a class="side-item" href="Reports.aspx">
+
+            <a id="lnkReports" runat="server" class="side-item" href="Reports.aspx">
                 <i class="fa fa-chart-column me-2"></i> Reportes
             </a>
         </aside>
+
+
 
         <!-- Main -->
         <main class="content">

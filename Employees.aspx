@@ -50,7 +50,9 @@
                         PageSize="8"
                         OnPageIndexChanging="gvEmployees_PageIndexChanging"
                         OnSelectedIndexChanged="gvEmployees_SelectedIndexChanged"
-                        OnRowDataBound="gvEmployees_RowDataBound">
+                        OnRowDataBound="gvEmployees_RowDataBound"
+                        OnRowCreated="gvEmployees_RowCreated"
+                        >
 
                         <SelectedRowStyle CssClass="table-primary" />
 

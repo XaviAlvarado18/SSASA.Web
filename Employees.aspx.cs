@@ -299,5 +299,26 @@ namespace SSASA.WebApi
             ClearDetails();
         }
 
+        protected void gvEmployees_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType != DataControlRowType.Pager) return;
+
+            var lbPrev = e.Row.FindControl("lbPrev") as LinkButton;
+            var lbNext = e.Row.FindControl("lbNext") as LinkButton;
+
+            if (lbPrev != null && gvEmployees.PageIndex == 0)
+            {
+                lbPrev.CssClass += " disabled";
+                lbPrev.Enabled = false;
+            }
+
+            if (lbNext != null && gvEmployees.PageIndex >= gvEmployees.PageCount - 1)
+            {
+                lbNext.CssClass += " disabled";
+                lbNext.Enabled = false;
+            }
+        }
+
+
     }
 }

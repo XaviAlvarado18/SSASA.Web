@@ -127,6 +127,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\dashboard.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Departments.aspx" />
     <Content Include="EmployeeRegistration.aspx" />
     <Content Include="Employees.aspx" />
     <Content Include="EmployeeSaved.aspx" />
@@ -179,6 +180,12 @@
     <Content Include="Connected Services\EmployeesService\SSASA.Web.EmployeesService.SaveEmployeeResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Connected Services\EmployeesService\SSASA.Web.EmployeesService.Department.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\EmployeesService\SSASA.Web.EmployeesService.GetAllDepartmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -219,6 +226,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Departments.aspx.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Departments.aspx.designer.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeeRegistration.aspx.cs">
       <DependentUpon>EmployeeRegistration.aspx</DependentUpon>
